@@ -3,11 +3,10 @@
 
 import Button from "@/app/components/Button"
 import Input from "@/app/components/inputs/Input"
-//npm install react-icons react-hook-form clsx
 //react icons:  adiciona icons 
 //reacct hook form: permite a utilização de hooks para manipular os FOrmularios
-//clsx:
 
+import axios from "axios"
 import { useCallback, useState } from "react"
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form"
 import { BsGoogle} from 'react-icons/bs'
@@ -48,7 +47,7 @@ const AuthForm = ()=>{
         setIsLoading(true)
 
         if(typeForm === 'REGISTER'){
-            //do
+            axios.post('/api/register', data)
         }
         if(typeForm === 'LOGIN'){
             //do this
