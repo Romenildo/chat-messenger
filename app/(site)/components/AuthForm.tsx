@@ -1,6 +1,7 @@
 'use client'//é necessario caso vai manipular com o cliente utilizando useEffects hooks useState...
 
 
+import Button from "@/app/components/Button"
 import Input from "@/app/components/inputs/Input"
 //npm install react-icons react-hook-form clsx
 //react icons:  adiciona icons 
@@ -9,6 +10,7 @@ import Input from "@/app/components/inputs/Input"
 
 import { useCallback, useState } from "react"
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form"
+
 type TypeForm = 'LOGIN' | 'REGISTER'
 
 const AuthForm = ()=>{
@@ -62,10 +64,22 @@ const AuthForm = ()=>{
             <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
 
                 <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-                    <Input id="name" label="name" register={register} errors={errors} />
-                    <Input id="email" label="Email" register={register} errors={errors} />
-                    <Input id="password" label="password" register={register} errors={errors} />
 
+                    {/* Name so vai aparecer see for para rgistrar um novo usuario */}
+                    {typeForm ==="REGISTER" && (
+                        <Input id="name" label="name" register={register} errors={errors} />
+                    )}
+                    <Input id="email" label="Email address" type="email" register={register} errors={errors} />
+                    <Input id="password" label="Password" type="password" register={register} errors={errors} />
+
+                    <div>
+                        <Button 
+                            disabled={isLoading}
+                            fullWidth
+                            type="submit"
+
+                        >{typeForm ==='LOGIN'? "Login": "Registrar"}</Button>
+                    </div>
                 </form>
 
             </div>
