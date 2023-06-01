@@ -1,6 +1,7 @@
 'use client'//é necessario caso vai manipular com o cliente utilizando useEffects hooks useState...
 
 
+import Input from "@/app/components/inputs/Input"
 //npm install react-icons react-hook-form clsx
 //react icons:  adiciona icons 
 //reacct hook form: permite a utilização de hooks para manipular os FOrmularios
@@ -61,7 +62,9 @@ const AuthForm = ()=>{
             <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
 
                 <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-
+                    <Input id="name" label="name" register={register} errors={errors} />
+                    <Input id="email" label="Email" register={register} errors={errors} />
+                    <Input id="password" label="password" register={register} errors={errors} />
 
                 </form>
 
