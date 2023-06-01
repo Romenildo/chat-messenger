@@ -10,6 +10,7 @@ import axios from "axios"
 import { useCallback, useState } from "react"
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form"
 import { BsGoogle} from 'react-icons/bs'
+import toast from "react-hot-toast"
 
 import AuthSocialButton from "./AuthSocialButton"
 
@@ -48,6 +49,8 @@ const AuthForm = ()=>{
 
         if(typeForm === 'REGISTER'){
             axios.post('/api/register', data)
+            .catch(()=> toast.error("Erro desconhecido"))
+            .finally(()=> setIsLoading(false))
         }
         if(typeForm === 'LOGIN'){
             //do this
