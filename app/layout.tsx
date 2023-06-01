@@ -2,7 +2,7 @@ import './globals.css'
 
 
 export const metadata = {
-  title: 'MEssenger chat',
+  title: 'Messenger chat',
   description: 'Clone do Messenger',
 }
 
