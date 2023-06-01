@@ -7,20 +7,27 @@ import Input from "@/app/components/inputs/Input"
 //reacct hook form: permite a utilização de hooks para manipular os FOrmularios
 
 import axios from "axios"
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form"
 import { BsGoogle} from 'react-icons/bs'
 import toast from "react-hot-toast"
-import { signIn } from "next-auth/react"
-
+import { signIn, useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
 import AuthSocialButton from "./AuthSocialButton"
 
 type TypeForm = 'LOGIN' | 'REGISTER'
 
 const AuthForm = ()=>{
+    const session = useSession()
+    const router = useRouter()
     const [typeForm, setTypeForm] = useState<TypeForm>('LOGIN')
     const [isLoading, setIsLoading] = useState(false)
 
+    useEffect(()=>{
+        if(session?.status === 'authenticated'){
+            router.push('/users')
+        }
+    }, [session?.status, router])
 
     //alternar entre Login e registro de usuarios
     const toggleTypeForm = useCallback(()=>{
@@ -50,6 +57,7 @@ const AuthForm = ()=>{
 
         if(typeForm === 'REGISTER'){
             axios.post('/api/register', data)
+            .then(()=>{signIn('credentials', data)})
             .catch(()=> toast.error("Erro desconhecido"))
             .finally(()=> setIsLoading(false))
         }
@@ -64,6 +72,7 @@ const AuthForm = ()=>{
                 }
                 if(callback?.ok && !callback?.error){
                     toast.success("Logado com sucesso!")
+                    router.push('/users')
                 }
             })
             .finally(()=>{setIsLoading(false)})
@@ -73,7 +82,7 @@ const AuthForm = ()=>{
 
     const socialAction = (action: string)=>{
         setIsLoading(true)
-        //do
+        toast.error("Não implementado!")
     }
 
 
