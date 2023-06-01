@@ -1,4 +1,5 @@
 import Image from "next/image";
+import AuthForm from "./components/AuthForm";
 
 
 export default function Home() {
@@ -19,6 +20,8 @@ export default function Home() {
                 Entre com sua Conta
             </h2>
         </div>
+
+        <AuthForm/>
       </div>
     )
   }
