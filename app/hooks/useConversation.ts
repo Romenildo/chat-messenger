@@ -1,6 +1,8 @@
 import { useParams } from "next/navigation";
 import { useMemo } from "react";
 
+
+//armazenar na memoria se a navvbar está aberta ou não
 const useConversation = () => {
   const params = useParams();
 
