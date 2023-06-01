@@ -11,6 +11,7 @@ import { useCallback, useState } from "react"
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form"
 import { BsGoogle} from 'react-icons/bs'
 import toast from "react-hot-toast"
+import { signIn } from "next-auth/react"
 
 import AuthSocialButton from "./AuthSocialButton"
 
@@ -53,7 +54,19 @@ const AuthForm = ()=>{
             .finally(()=> setIsLoading(false))
         }
         if(typeForm === 'LOGIN'){
-            //do this
+            signIn('credentials', {
+                ...data,
+                redirect:false
+            })
+            .then((callback)=>{
+                if(callback?.error){
+                    toast.error("Login ou senha Invalido!")
+                }
+                if(callback?.ok && !callback?.error){
+                    toast.success("Logado com sucesso!")
+                }
+            })
+            .finally(()=>{setIsLoading(false)})
         }
 
     }
